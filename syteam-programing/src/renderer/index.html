@@ -1,0 +1,649 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; worker-src 'self' blob:;">
+
+    <title>System Programming Management System</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="logo">
+                <div class="logo-icon">SP</div>
+                <div>
+                    <h2>SysManager</h2>
+                    <small>System Programming</small>
+                </div>
+            </div>
+
+            <div class="menu-label">MAIN MENU</div>
+
+            <nav class="navigation">
+
+                <button class="nav-btn active" data-page="dashboard">
+                    <span>▦</span> Dashboard
+                </button>
+
+                <button class="nav-btn" data-page="processes">
+                    <span>⚙</span> Process Management
+                </button>
+
+                <button class="nav-btn" data-page="files">
+                    <span>▤</span> File Management
+                </button>
+
+                <button class="nav-btn" data-page="threads">
+                    <span>⇄</span> Thread Management
+                </button>
+
+                <button class="nav-btn" data-page="memory">
+                    <span>▣</span> Memory Management
+                </button>
+
+                <button class="nav-btn" data-page="system">
+                    <span>▥</span> System Information
+                </button>
+
+            </nav>
+
+            <div class="sidebar-footer">
+                <p>System Programming</p>
+                <small>Version 1.0.0</small>
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+            <header class="topbar">
+                <div>
+                    <h2 id="page-title">Dashboard</h2>
+                    <p>Welcome to your System Programming Management System</p>
+                </div>
+
+                <div class="status">
+                    <span class="status-dot"></span>
+                    System Online
+                </div>
+            </header>
+
+
+            <!-- DASHBOARD PAGE -->
+            <section class="page active" id="dashboard">
+
+                <div class="welcome-card">
+                    <div>
+                        <h1>System Programming Dashboard</h1>
+                        <p>
+                            Manage processes, files, threads,
+                            memory and system resources.
+                        </p>
+                    </div>
+                    <div class="welcome-icon">💻</div>
+                </div>
+
+                <h3 class="section-title">System Modules</h3>
+
+                <div class="module-grid">
+
+                    <div class="module-card">
+                        <div class="module-icon blue">⚙</div>
+                        <h3>Process Management</h3>
+                        <p>Start, stop and monitor application processes.</p>
+                        <button class="open-btn" data-page="processes">
+                            Open Module →
+                        </button>
+                    </div>
+
+                    <div class="module-card">
+                        <div class="module-icon green">▤</div>
+                        <h3>File Management</h3>
+                        <p>Create, read, write, copy and delete files.</p>
+                        <button class="open-btn" data-page="files">
+                            Open Module →
+                        </button>
+                    </div>
+
+                    <div class="module-card">
+                        <div class="module-icon purple">⇄</div>
+                        <h3>Thread Management</h3>
+                        <p>Create and control background worker threads.</p>
+                        <button class="open-btn" data-page="threads">
+                            Open Module →
+                        </button>
+                    </div>
+
+                    <div class="module-card">
+                        <div class="module-icon orange">▣</div>
+                        <h3>Memory Management</h3>
+                        <p>Allocate, release and monitor application memory.</p>
+                        <button class="open-btn" data-page="memory">
+                            Open Module →
+                        </button>
+                    </div>
+
+                    <div class="module-card">
+                        <div class="module-icon red">▥</div>
+                        <h3>System Information</h3>
+                        <p>View CPU, RAM, operating system and disk details.</p>
+                        <button class="open-btn" data-page="system">
+                            Open Module →
+                        </button>
+                    </div>
+
+                </div>
+
+                <div class="info-panel">
+                    <h3>Application Information</h3>
+                    <p id="app-info">Loading application information...</p>
+                </div>
+
+            </section>
+
+
+            <!-- PROCESS MANAGEMENT -->
+            
+<!-- PROCESS MANAGEMENT -->
+<section class="page" id="processes">
+
+    <h2>Process Management</h2>
+
+    <p>Start, monitor and manage Windows processes.</p>
+
+    <div class="module-workspace">
+
+        <h3>Launch New Process</h3>
+
+        <div class="process-controls">
+
+            <select id="application-select">
+                <option value="notepad">Notepad</option>
+                <option value="calculator">Calculator</option>
+            </select>
+
+            <button id="start-process" class="action-btn">
+                Start Process
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="module-workspace">
+
+        <div class="table-heading">
+
+            <div>
+                <h3>Running Processes</h3>
+                <p>Processes currently running on Windows.</p>
+            </div>
+
+            <button id="refresh-processes" class="action-btn">
+                Refresh Processes
+            </button>
+
+        </div>
+
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Process Name</th>
+                        <th>Process ID</th>
+                        <th>Memory Usage</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="process-table-body">
+
+                    <tr>
+                        <td colspan="4">Loading processes...</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <div class="module-workspace">
+
+        <h3>Process Activity</h3>
+
+        <div id="process-message">
+            Ready to manage processes.
+        </div>
+
+    </div>
+
+</section>
+
+
+            <!-- FILE MANAGEMENT -->
+           <section class="page" id="files">
+    <h2>File Management</h2>
+    <p>Browse and manage files and folders on your computer.</p>
+
+    <div class="module-workspace">
+        <h3>Select Working Directory</h3>
+
+        <div class="process-controls">
+            <button id="select-directory" class="action-btn">
+                Choose Folder
+            </button>
+
+            <span id="selected-directory">
+                No folder selected
+            </span>
+        </div>
+    </div>
+
+    <div class="module-workspace">
+        <div class="table-heading">
+            <div>
+                <h3>Directory Contents</h3>
+                <p>Files and folders in your selected directory.</p>
+            </div>
+
+            <button id="refresh-files" class="action-btn">
+                Refresh
+            </button>
+        </div>
+
+        <div class="process-controls">
+            <button id="create-folder" class="action-btn">
+                Create Folder
+            </button>
+
+            <button id="create-file" class="action-btn">
+                Create Text File
+            </button>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Size (bytes)</th>
+                        <th>Last Modified</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody id="file-table-body">
+                    <tr>
+                        <td colspan="5">Choose a folder to begin.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="module-workspace">
+        <h3>File Preview</h3>
+
+        <textarea
+            id="file-preview"
+            rows="10"
+            placeholder="Select Read on a text file to view its contents."
+            readonly
+        ></textarea>
+    </div>
+
+    <div class="module-workspace">
+        <h3>File Activity</h3>
+        <div id="file-message" role="status" aria-live="polite">
+            Ready to manage files.
+        </div>
+    </div>
+</section>
+            <!-- THREAD MANAGEMENT -->
+            <section class="page" id="threads">
+
+    <h2>Thread Management</h2>
+
+    <p>
+        Create, monitor and terminate background worker threads.
+    </p>
+
+    <div class="module-workspace">
+
+        <h3>Worker Thread Control</h3>
+
+        <p>
+            Start a background task that calculates prime numbers
+            without blocking the main application.
+        </p>
+
+        <button id="start-thread" class="action-btn">
+            Start New Thread
+        </button>
+
+    </div>
+
+    <div class="module-workspace">
+
+        <div class="table-heading">
+            <div>
+                <h3>Thread Information</h3>
+                <p>Monitor your background worker threads.</p>
+            </div>
+        </div>
+
+        <div class="table-container">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Thread ID</th>
+                        <th>Status</th>
+                        <th>Progress</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="thread-table-body">
+                    <tr>
+                        <td colspan="4">No threads started yet.</td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <div class="module-workspace">
+
+        <h3>Thread Activity</h3>
+
+        <div class="progress-container">
+            <div id="thread-progress-bar"></div>
+        </div>
+
+        <p id="thread-progress-text">Progress: 0%</p>
+
+        <div id="thread-message">
+            Ready to create background threads.
+        </div>
+
+        <h3>Task Result</h3>
+
+        <p id="thread-result">No result available yet.</p>
+
+    </div>
+
+</section>
+
+
+            <!-- MEMORY MANAGEMENT -->
+            <section class="page" id="memory">
+
+    <h2>Memory Management</h2>
+
+    <p>Monitor system RAM and application memory usage.</p>
+
+    <div class="module-workspace">
+
+        <div class="table-heading">
+            <div>
+                <h3>System Memory Overview</h3>
+                <p>Physical RAM utilization on your computer.</p>
+            </div>
+
+            <button id="refresh-memory" class="action-btn">
+                Refresh Memory
+            </button>
+        </div>
+
+        <div class="memory-cards">
+
+            <div class="memory-card">
+                <h4>Total RAM</h4>
+                <p id="total-memory">Loading...</p>
+            </div>
+
+            <div class="memory-card">
+                <h4>Used RAM</h4>
+                <p id="used-memory">Loading...</p>
+            </div>
+
+            <div class="memory-card">
+                <h4>Available RAM</h4>
+                <p id="free-memory">Loading...</p>
+            </div>
+
+        </div>
+
+        <h3>RAM Usage</h3>
+
+        <div class="memory-progress-container">
+            <div id="memory-progress-bar"></div>
+        </div>
+
+        <p id="memory-percentage">Usage: 0%</p>
+
+    </div>
+
+    <div class="module-workspace">
+
+        <h3>Application Memory Usage</h3>
+
+        <p>Memory consumed by the application backend process.</p>
+
+        <div class="memory-cards">
+
+            <div class="memory-card">
+                <h4>RSS</h4>
+                <p id="app-rss">Loading...</p>
+            </div>
+
+            <div class="memory-card">
+                <h4>Heap Used</h4>
+                <p id="app-heap-used">Loading...</p>
+            </div>
+
+            <div class="memory-card">
+                <h4>Heap Total</h4>
+                <p id="app-heap-total">Loading...</p>
+            </div>
+
+            <div class="memory-card">
+                <h4>External Memory</h4>
+                <p id="app-external">Loading...</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="module-workspace">
+        <h3>Memory Activity</h3>
+
+        <p id="memory-message">
+            Waiting for memory information...
+        </p>
+
+        <p id="memory-last-updated">
+            Last updated: Not yet available
+        </p>
+    </div>
+
+</section>
+
+            <!-- SYSTEM INFORMATION -->
+            <section class="page" id="system">
+
+    <h2>System Information</h2>
+
+    <p>View detailed information about your computer and operating system.</p>
+
+    <div class="module-workspace">
+
+        <div class="table-heading">
+            <div>
+                <h3>Computer Information</h3>
+                <p>Computer identification and hardware details.</p>
+            </div>
+
+            <button id="refresh-system" class="action-btn">
+                Refresh Information
+            </button>
+        </div>
+
+        <div class="system-info-grid">
+
+            <div class="system-info-card">
+                <h4>Hostname</h4>
+                <p id="system-hostname">Loading...</p>
+            </div>
+
+            <div class="system-info-card">
+                <h4>Manufacturer</h4>
+                <p id="system-manufacturer">Loading...</p>
+            </div>
+
+            <div class="system-info-card">
+                <h4>Computer Model</h4>
+                <p id="system-model">Loading...</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="module-workspace">
+
+        <h3>Operating System</h3>
+
+        <div class="system-info-grid">
+
+            <div class="system-info-card">
+                <h4>Operating System</h4>
+                <p id="system-os">Loading...</p>
+            </div>
+
+            <div class="system-info-card">
+                <h4>Version</h4>
+                <p id="system-release">Loading...</p>
+            </div>
+
+            <div class="system-info-card">
+                <h4>Kernel</h4>
+                <p id="system-kernel">Loading...</p>
+            </div>
+
+            <div class="system-info-card">
+                <h4>Architecture</h4>
+                <p id="system-architecture">Loading...</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="module-workspace">
+
+        <h3>Processor Information</h3>
+
+        <div class="system-info-grid">
+
+            <div class="system-info-card">
+                <h4>Processor Brand</h4>
+                <p id="cpu-brand">Loading...</p>
+            </div>
+
+            <div class="system-info-card">
+                <h4>Manufacturer</h4>
+                <p id="cpu-manufacturer">Loading...</p>
+            </div>
+
+            <div class="system-info-card">
+                <h4>Physical Cores</h4>
+                <p id="cpu-physical-cores">Loading...</p>
+            </div>
+
+            <div class="system-info-card">
+                <h4>Logical Cores</h4>
+                <p id="cpu-logical-cores">Loading...</p>
+            </div>
+
+            <div class="system-info-card">
+                <h4>CPU Speed</h4>
+                <p id="cpu-speed">Loading...</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="module-workspace">
+
+        <h3>Additional System Details</h3>
+
+        <div class="system-info-grid">
+
+            <div class="system-info-card">
+                <h4>Total RAM</h4>
+                <p id="system-total-ram">Loading...</p>
+            </div>
+
+            <div class="system-info-card">
+                <h4>System Uptime</h4>
+                <p id="system-uptime">Loading...</p>
+            </div>
+
+            <div class="system-info-card">
+                <h4>Logged-in User</h4>
+                <p id="system-user">Loading...</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="module-workspace">
+        <h3>System Activity</h3>
+        <p id="system-message">Waiting for system information...</p>
+        <p id="system-last-updated">Last updated: Not yet available</p>
+    </div>
+
+</section>
+
+        </main>
+
+    </div>
+
+    <script type="module" src="js/renderer.js"></script>
+    <script type="module" src="js/modules/processes.js"></script>
+    <script type="module" src="js/modules/files.js"></script>
+    <script type="module" src="js/modules/threads.js"></script>
+    <script type="module" src="js/modules/memory.js"></script>
+    <script type="module" src="js/modules/system.js"></script>
+</body>
+</html>
